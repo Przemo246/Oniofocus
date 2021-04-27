@@ -21,6 +21,12 @@ const DOM = {
   timerLongInput: document.querySelector('#timer-long'),
 };
 
+const timerBackgroundColors = {
+  main: '#f7b239',
+  short: '#0C8346',
+  long: '#2364AA',
+};
+
 const highlightActiveTimerBtn = (timer) => {
   document
     .querySelectorAll('#btn-main,#btn-short,#btn-long')
@@ -89,14 +95,14 @@ const timerHandler = () => {
       DOM.startStopBtn;
       timerState.seconds = 60;
       if (currentTimer === 'main') {
-        switchToShortTimer();
+        switchTimer('short');
         return;
       }
       if (currentTimer === 'short') {
-        switchToLongTimer();
+        switchTimer('long');
         return;
       }
-      switchToMainTimer();
+      switchTimer('main');
       return;
     }
     if (timerState.seconds === 0) {
@@ -121,48 +127,26 @@ const startStopButtonHandler = () => {
 
 DOM.startStopBtn.addEventListener('click', startStopButtonHandler);
 
-const switchToMainTimer = () => {
-  DOM.body.style.backgroundColor = '#f7b239';
-  DOM.timerStatus.textContent = 'Time to work! 👨‍💻';
-  renderTimeOnUI(settings.main);
+const switchTimer = (type) => {
+  isTimerOn = false;
+  DOM.startStopBtn.classList.remove('timer-start__btn--active');
+  DOM.startStopBtn.textContent = 'START';
+  DOM.body.style.backgroundColor = timerBackgroundColors[type];
+  DOM.timerStatus.textContent =
+    type === 'main' ? 'Time to work! 👨‍💻' : 'Time for break! ☕';
+  renderTimeOnUI(settings[type]);
   if (timerId) {
     clearInterval(timerId);
   }
-  timerState.minutes = settings.main - 1;
+  timerState.minutes = settings[type] - 1;
   timerState.seconds = 60;
-  currentTimer = 'main';
+  currentTimer = type;
   highlightActiveTimerBtn(currentTimer);
 };
 
-const switchToShortTimer = () => {
-  DOM.body.style.backgroundColor = '#0C8346';
-  DOM.timerStatus.textContent = 'Time for break! ☕';
-  renderTimeOnUI(settings.short);
-  if (timerId) {
-    clearInterval(timerId);
-  }
-  timerState.minutes = settings.short - 1;
-  timerState.seconds = 60;
-  currentTimer = 'short';
-  highlightActiveTimerBtn(currentTimer);
-};
-
-const switchToLongTimer = () => {
-  DOM.body.style.backgroundColor = '#2364AA';
-  DOM.timerStatus.textContent = 'Time for break! ☕';
-  renderTimeOnUI(settings.long);
-  if (timerId) {
-    clearInterval(timerId);
-  }
-  timerState.minutes = settings.long - 1;
-  timerState.seconds = 60;
-  currentTimer = 'long';
-  highlightActiveTimerBtn(currentTimer);
-};
-
-DOM.mainTimerBtn.addEventListener('click', switchToMainTimer);
-DOM.shortTimerBtn.addEventListener('click', switchToShortTimer);
-DOM.longTimerBtn.addEventListener('click', switchToLongTimer);
+DOM.mainTimerBtn.addEventListener('click', () => switchTimer('main'));
+DOM.shortTimerBtn.addEventListener('click', () => switchTimer('short'));
+DOM.longTimerBtn.addEventListener('click', () => switchTimer('long'));
 
 DOM.okBtn.addEventListener('click', () => {
   const main = +DOM.timerMainInput.value;
