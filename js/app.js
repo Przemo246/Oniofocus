@@ -38,7 +38,7 @@ let isTimerOn = false;
 let currentTimer = 'main';
 highlightActiveTimerBtn(currentTimer);
 let settings = JSON.parse(localStorage.getItem('userSettings')) || {
-  main: 1,
+  main: 25,
   short: 5,
   long: 15,
 };
