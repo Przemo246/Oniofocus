@@ -10,3 +10,4 @@ This is a simple web app written in Vanilla JavaScript I created on a front-end 
 To do:
 * Create a progress bar.
 * Show timer modes in the title.
+* Rewrite project in React
