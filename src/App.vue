@@ -1,21 +1,13 @@
 <template>
-  <label htmlFor="my-modal-4" className="btn">open modal</label>
-
-  <input type="checkbox" id="my-modal-4" className="modal-toggle" />
-  <label htmlFor="my-modal-4" className="modal cursor-pointer">
-    <label className="modal-box relative" htmlFor="">
-      <label
-        for="my-modal-4"
-        class="btn btn-sm btn-circle absolute right-2 top-2"
-        >✕</label
-      >
-      <h3 className="text-lg font-bold">
-        Congratulations random Internet user!
-      </h3>
-      <p className="py-4">
-        You've been selected for a chance to get one year of subscription to use
-        Wikipedia for free!
-      </p>
-    </label>
-  </label>
+  <main
+    class="text-dark-gray bg-primary-orange font-manrope font-normal min-h-screen flex items-center justify-center"
+  >
+    <div className="bg-white w-3/4 max-w-5xl p-10 min-h-[60vh] text-base">
+      <TimerFace />
+    </div>
+  </main>
 </template>
+
+<script setup lang="ts">
+import TimerFace from './components/organisms/TimerFace.vue'
+</script>
