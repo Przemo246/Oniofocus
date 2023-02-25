@@ -6,8 +6,3 @@ This is a simple web app written in Vanilla JavaScript I created on a front-end 
 * After the timer stops alarm goes off and the timer switches to the next mode.
 * If you're doing something online, you can open another tab and the timer is still visible on the tab.
 * Set up your own times in **Settings** or simply go with the default times.
-
-To do:
-* Create a progress bar.
-* Show timer modes in the title.
-* Rewrite project in React
